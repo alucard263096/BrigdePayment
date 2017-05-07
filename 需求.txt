@@ -1,0 +1,28 @@
+1.設計一個"預交易處理單" WEB API, 會傳入"客戶代號"或是"訂單金額", 返回Json String
+{
+	"return_code":"SUCCESS",
+	"return_msg":"OK",
+	"appid":"wxb92981b6615910c7",
+	"mch_id":"1400721802",
+	"nonce_str":"SC94oeo9vgd0p6Be",
+	"sign":"B9B82E2FCAB95F415E57BA19570A80F2",
+	"result_code":"SUCCESS",
+	"prepay_id":"wx20170413113420e9642869d00680193075",
+	"trade_type":"APP"
+}
+
+2.設計一個"查詢訂單狀態" WEB API, 會傳入"訂單編號", 返回Json String
+{
+    "result_code":"SUCCESS" /*** SUCCESS/FAIL ***/
+	"trade_state":"NOTPAY"  /*** SUCCESS/REFUND/NOTPAY/CLOSED/REVOKED/USERPAYING/PAYERROR ***/
+}
+
+3.每次訪問都傳入 Json-Web-Token(JWT) Authorization Parameter
+
+
+
+
+
+
+
+http://localhost:64212/payment.aspx?orderno=kkc003&amount=1&customerid=abcdabcd&subject=test&sign=abbc88512b75682e859144259a19c279
