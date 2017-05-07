@@ -59,10 +59,6 @@ namespace BrigdePayment
 
                 string prepay_id = generatePrepayId(subject, amount, orderno);
 
-                if (string.IsNullOrEmpty(prepay_id))
-                {
-                    outputJSON(new ResultObj("-301", "prepay_id generate fail", null));
-                }
                
                 response.Add("appid", APP_ID);
                 response.Add("partnerid", MCH_ID);
@@ -109,7 +105,7 @@ namespace BrigdePayment
             }
             catch
             {
-
+                outputJSON(new ResultObj("-301", "prepay_id generate fail", result));
             }
 
             return "";
