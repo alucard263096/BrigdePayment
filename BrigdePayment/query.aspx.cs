@@ -47,28 +47,7 @@ namespace BrigdePayment
                     {
                         if (xroot.Element("result_code").Value == "SUCCESS")
                         {
-                            List<Param> lst = new List<Param>();
-                            lst.Add(new Param("orderno", orderno));
-                            DataTable dt=PaymentMgr.list(DBFactory.GetInstance(), lst);
-                            int primary_id = 0;
-                            if (dt.Rows.Count > 0)
-                            {
-                                foreach (DataRow dr in dt.Rows)
-                                {
-                                    if (dr["orderno"].ToString() == orderno)
-                                    {
-                                        primary_id = Convert.ToInt32(dr["id"]);
-                                    }
-                                }
-                            }
-                            lst.Add(new Param("time_end", xroot.Element("time_end").Value));
-                            lst.Add(new Param("openid", xroot.Element("openid").Value));
-                            lst.Add(new Param("total_fee", xroot.Element("total_fee").Value));
-                            lst.Add(new Param("trade_type", xroot.Element("trade_type").Value));
-                            lst.Add(new Param("transaction_id", xroot.Element("transaction_id").Value));
-                            lst.Add(new Param("result_code", xroot.Element("result_code").Value));
-
-                            PaymentMgr.update(DBFactory.GetInstance(), lst);
+                            UpdatePaymentInfo(orderno, xroot);
 
                             outputJSON(new ResultObj("0", "SUCCESS", xroot.Element("trade_state").Value));
                         }
@@ -94,5 +73,6 @@ namespace BrigdePayment
                 return;
             }
         }
+
     }
 }

@@ -27,7 +27,7 @@ export class HomePage {
         var json = { "orderno": this.orderno, "customerid": this.customerid, "amount": this.amount, "subject": this.subject, "sign": sign };
         this.paymentApi.list(json).then((data) => {
             alert(JSON.stringify(data));
-            Wechat.sendPaymentRequest(data, function () {
+            Wechat.sendPaymentRequest(data.ret, function () {
                 alert("Success");
             }, function (reason) {
                 alert("Failed: " + reason);

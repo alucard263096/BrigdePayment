@@ -59,10 +59,12 @@ namespace BrigdePayment
                 response.Add("partnerid", MCH_ID);
                 response.Add("prepayid", prepay_id);
                 response.Add("package", "Sign=WXPay");
-                response.Add("noncestr", nonce_str);
-                response.Add("timestamp", DateTime.Now.Ticks.ToString());
+                response.Add("noncestr", createNonceStr());
+                response.Add("timestamp", Convert.ToString(convertDateTimeInt(DateTime.Now)));
                 string sign = calculateSign(response, APP_KEY);
                 response.Add("sign", sign);
+                outputJSON(new ResultObj("0", "success", response));
+                return;
             }
             catch (Exception ex)
             {
@@ -70,7 +72,6 @@ namespace BrigdePayment
                 return;
             }
 
-            outputJSON(new ResultObj("0", "success", response));
         }
 
         private string generatePrepayId(string subject, string amount, string orderno)
@@ -78,13 +79,12 @@ namespace BrigdePayment
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("appid", APP_ID);
             param.Add("mch_id", MCH_ID);
-            param.Add("nonce_str", nonce_str);
+            param.Add("nonce_str", createNonceStr());
             param.Add("body", subject);
             param.Add("out_trade_no", orderno);
-            param.Add("total_fee", (Convert.ToDecimal(amount) * 100).ToString());
+            param.Add("total_fee", Convert.ToInt32((Convert.ToDecimal(amount) * 100)).ToString());
             param.Add("spbill_create_ip", "1.2.3.4");
-            string notifyurl = "http://" + HttpContext.Current.Request.Url.Host + ":" + HttpContext.Current.Request.Url.Port 
-                + "/notify.aspx";
+            string notifyurl = "http://" + HttpContext.Current.Request.Url.Host  + "/notify.aspx";
             param.Add("notify_url", notifyurl);
             param.Add("trade_type", "APP");
             string sign = calculateSign(param,APP_KEY);
@@ -109,6 +109,36 @@ namespace BrigdePayment
             return "";
 
         }
-        
+
+        /// <summary>
+        /// 创建随机字符串
+        /// </summary>
+        /// <returns></returns>
+        private static string createNonceStr()
+        {
+            int length = 16;
+            string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string str = "";
+            Random rad = new Random();
+            for (int i = 0; i < length; i++)
+            {
+                str += chars.Substring(rad.Next(0, chars.Length - 1), 1);
+            }
+            return str;
+        }
+
+        /// 将c# DateTime时间格式转换为Unix时间戳格式  
+        /// <summary>  
+        /// 将c# DateTime时间格式转换为Unix时间戳格式  
+        /// </summary>  
+        /// <param name="time">时间</param>  
+        /// <returns>double</returns>  
+        public static int convertDateTimeInt(System.DateTime time)
+        {
+            int intResult = 0;
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+            intResult = Convert.ToInt32((time - startTime).TotalSeconds);
+            return intResult;
+        }
     }
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AppLink.api;
+using AppLink.core;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -7,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Xml.Linq;
 
 namespace BrigdePayment
 {
@@ -40,10 +44,14 @@ namespace BrigdePayment
 
         public static string MD5Encrypt(string strText)
         {
-            byte[] result = Encoding.Default.GetBytes(strText);    //tbPass为输入密码的文本框  
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] output = md5.ComputeHash(result);
-            return BitConverter.ToString(output).Replace("-", "");
+            MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
+            byte[] data = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(strText));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
         }
 
         public void outputJSON(ResultObj obj)
@@ -146,6 +154,31 @@ namespace BrigdePayment
                 this.result = result;
                 this.ret = ret;
             }
+        }
+        public static void UpdatePaymentInfo(string orderno, XElement xroot)
+        {
+            List<Param> lst = new List<Param>();
+            lst.Add(new Param("orderno", orderno));
+            DataTable dt = PaymentMgr.list(DBFactory.GetInstance(), lst);
+            int primary_id = 0;
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr["orderno"].ToString() == orderno)
+                    {
+                        primary_id = Convert.ToInt32(dr["id"]);
+                    }
+                }
+            }
+            lst.Add(new Param("time_end", xroot.Element("time_end").Value));
+            lst.Add(new Param("openid", xroot.Element("openid").Value));
+            lst.Add(new Param("total_fee", xroot.Element("total_fee").Value));
+            lst.Add(new Param("trade_type", xroot.Element("trade_type").Value));
+            lst.Add(new Param("transaction_id", xroot.Element("transaction_id").Value));
+            lst.Add(new Param("result_code", xroot.Element("result_code").Value));
+
+            PaymentMgr.update(DBFactory.GetInstance(), lst, primary_id);
         }
     }
 }
