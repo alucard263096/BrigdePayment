@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrigdePayment", "BrigdePayment\BrigdePayment.csproj", "{5A3EAB5F-E2D0-447C-B4D1-95ECD616DF7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrigdePayment", "BrigdePayment\BrigdePayment.csproj", "{D16FC621-735F-4826-8751-9FF57E152B49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLink.api", "AppLink.api\AppLink.api.csproj", "{997F09A6-C7AC-44D6-AC28-34C21A537903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLink.core", "AppLink.core\AppLink.core.csproj", "{EEADF67F-FE42-438D-87B7-47FFCBD19784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A3EAB5F-E2D0-447C-B4D1-95ECD616DF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A3EAB5F-E2D0-447C-B4D1-95ECD616DF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A3EAB5F-E2D0-447C-B4D1-95ECD616DF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A3EAB5F-E2D0-447C-B4D1-95ECD616DF7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16FC621-735F-4826-8751-9FF57E152B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16FC621-735F-4826-8751-9FF57E152B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16FC621-735F-4826-8751-9FF57E152B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16FC621-735F-4826-8751-9FF57E152B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{997F09A6-C7AC-44D6-AC28-34C21A537903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{997F09A6-C7AC-44D6-AC28-34C21A537903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997F09A6-C7AC-44D6-AC28-34C21A537903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{997F09A6-C7AC-44D6-AC28-34C21A537903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEADF67F-FE42-438D-87B7-47FFCBD19784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEADF67F-FE42-438D-87B7-47FFCBD19784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEADF67F-FE42-438D-87B7-47FFCBD19784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEADF67F-FE42-438D-87B7-47FFCBD19784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
