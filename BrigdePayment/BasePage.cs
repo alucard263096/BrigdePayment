@@ -17,9 +17,9 @@ namespace BrigdePayment
     public class BasePage : System.Web.UI.Page
     {
         string token = "abcd1234";
-        protected string APP_ID = "wxb92981b6615910c7";
-        protected string MCH_ID = "1400721802";
-        protected string APP_KEY = "03941b924d12454219648d61a7b025e1";
+        protected string APP_ID = "wx1f019f189169be45";
+        protected string MCH_ID = "1473143102";
+        protected string APP_KEY = "62dc9da41581e7648499a741d2cd3b51";//md5(skyschool)
 
         internal bool CheckSign(string requestParams)
         {
